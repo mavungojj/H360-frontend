@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import PatientsPage from './pages/PatientsPage';
 import AppointmentsPage from './pages/AppointmentsPage';
+import ExamsPage from './pages/ExamsPage';
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth();
@@ -22,6 +23,9 @@ function Layout({ children }: { children: React.ReactNode }) {
             <NavLink to="/appointments" className={({ isActive }) =>
               `text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-600 hover:text-gray-800'}`
             }>Consultas</NavLink>
+            <NavLink to="/exams" className={({ isActive }) =>
+              `text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-600 hover:text-gray-800'}`
+            }>Exames</NavLink>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -51,6 +55,9 @@ function AppRoutes() {
       } />
       <Route path="/appointments" element={
         <PrivateRoute><Layout><AppointmentsPage /></Layout></PrivateRoute>
+      } />
+      <Route path="/exams" element={
+        <PrivateRoute><Layout><ExamsPage /></Layout></PrivateRoute>
       } />
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
