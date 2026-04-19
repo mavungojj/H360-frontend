@@ -7,6 +7,7 @@ import AppointmentsPage from './pages/AppointmentsPage';
 import ExamsPage from './pages/ExamsPage';
 import PatientProfilePage from './pages/PatientProfilePage';
 import SubscriptionPage from './pages/SubscriptionPage';
+import UsersPage from "./pages/UsersPage";
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth();
@@ -28,6 +29,9 @@ function Layout({ children }: { children: React.ReactNode }) {
             <NavLink to="/exams" className={({ isActive }) =>
               `text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-600 hover:text-gray-800'}`
             }>Exames</NavLink>
+            <NavLink to="/users" className={({ isActive }) =>
+              `text-sm font-medium ${isActive ? "text-blue-600" : "text-gray-600 hover:text-gray-800"}`
+            }>Funcionarios</NavLink>
             <NavLink to="/subscription" className={({ isActive }) =>
               `text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-600 hover:text-gray-800'}`
             }>Subscrição</NavLink>
@@ -67,6 +71,9 @@ function AppRoutes() {
       } />
       <Route path="/exams" element={
         <PrivateRoute><Layout><ExamsPage /></Layout></PrivateRoute>
+      } />
+      <Route path="/users" element={
+        <PrivateRoute><Layout><UsersPage /></Layout></PrivateRoute>
       } />
       <Route path="/subscription" element={
         <PrivateRoute><Layout><SubscriptionPage /></Layout></PrivateRoute>
