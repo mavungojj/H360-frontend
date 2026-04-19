@@ -6,6 +6,7 @@ import PatientsPage from './pages/PatientsPage';
 import AppointmentsPage from './pages/AppointmentsPage';
 import ExamsPage from './pages/ExamsPage';
 import PatientProfilePage from './pages/PatientProfilePage';
+import SubscriptionPage from './pages/SubscriptionPage';
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth();
@@ -27,6 +28,9 @@ function Layout({ children }: { children: React.ReactNode }) {
             <NavLink to="/exams" className={({ isActive }) =>
               `text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-600 hover:text-gray-800'}`
             }>Exames</NavLink>
+            <NavLink to="/subscription" className={({ isActive }) =>
+              `text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-600 hover:text-gray-800'}`
+            }>Subscrição</NavLink>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -40,7 +44,8 @@ function Layout({ children }: { children: React.ReactNode }) {
 }
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
+  if (loading) return <div className="min-h-screen flex items-center justify-center text-gray-500">A carregar...</div>;
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
 }
 
@@ -62,6 +67,9 @@ function AppRoutes() {
       } />
       <Route path="/exams" element={
         <PrivateRoute><Layout><ExamsPage /></Layout></PrivateRoute>
+      } />
+      <Route path="/subscription" element={
+        <PrivateRoute><Layout><SubscriptionPage /></Layout></PrivateRoute>
       } />
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
