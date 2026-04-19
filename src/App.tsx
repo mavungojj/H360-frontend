@@ -5,6 +5,7 @@ import DashboardPage from './pages/DashboardPage';
 import PatientsPage from './pages/PatientsPage';
 import AppointmentsPage from './pages/AppointmentsPage';
 import ExamsPage from './pages/ExamsPage';
+import PatientProfilePage from './pages/PatientProfilePage';
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth();
@@ -52,6 +53,9 @@ function AppRoutes() {
       } />
       <Route path="/patients" element={
         <PrivateRoute><Layout><PatientsPage /></Layout></PrivateRoute>
+      } />
+      <Route path="/patients/:id" element={
+        <PrivateRoute><Layout><PatientProfilePage /></Layout></PrivateRoute>
       } />
       <Route path="/appointments" element={
         <PrivateRoute><Layout><AppointmentsPage /></Layout></PrivateRoute>
